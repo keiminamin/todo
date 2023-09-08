@@ -12,7 +12,7 @@ class NewItemViewController: UIViewController {
     @IBOutlet var bodyTextField:UITextField!
     @IBOutlet var doneDate:UIDatePicker!
     @IBOutlet var markSwitch:UISwitch!
-    
+   
     let realm = try!Realm()
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -13,4 +13,5 @@ class TodoContent :Object{
     @Persisted var body:String = ""
     @Persisted var isMarked:Bool = false
     @Persisted var date:Date = Date()
+    @Persisted var number:Int = 0
 }
