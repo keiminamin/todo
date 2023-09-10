@@ -1,18 +1,14 @@
 //
-//  NewItemViewController.swift
+//  NewCategoryViewController.swift
 //  TodoHomeWork
 //
-//  Created by 長島啓太朗 on 2023/09/05.
+//  Created by 長島啓太朗 on 2023/09/10.
 //
 
 import UIKit
 import RealmSwift
-class NewItemViewController: UIViewController {
-    @IBOutlet var titleTextField:UITextField!
-    @IBOutlet var bodyTextField:UITextField!
-    @IBOutlet var doneDate:UIDatePicker!
-    @IBOutlet var markSwitch:UISwitch!
-   
+class NewCategoryViewController: UIViewController {
+    @IBOutlet var categoryTextField: UITextField!
     let realm = try!Realm()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,17 +16,18 @@ class NewItemViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     @IBAction func save(){
-        let content = TodoContent()
-        content.title = titleTextField.text ?? ""
-        content.body = bodyTextField.text ?? ""
-        content.isMarked = markSwitch.isOn
-        createItem(content: content)
+        let category = Category()
+        category.title = categoryTextField.text ?? ""
+        createCategory(category: category)
         self.dismiss(animated: true)
+        
     }
-    func createItem(content :TodoContent){
+    func createCategory(category:Category){
         try! realm.write{
-            realm.add(content)
+            realm.add(category)
+            
         }
+        print("OK")
     }
     /*
     // MARK: - Navigation

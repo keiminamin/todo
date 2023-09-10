@@ -7,10 +7,11 @@
 
 import UIKit
 import RealmSwift
-class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate {
+class TodoViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate {
     @IBOutlet var tableView: UITableView!
     let realm = try! Realm()
     var contents:Results<TodoContent>!
+    var selectedCategory:Category!
     override func viewDidLoad() {
        
         super.viewDidLoad()
@@ -19,6 +20,7 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
         tableView.delegate = self
         tableView.register(UINib(nibName: "TodoTableViewCell", bundle: nil), forCellReuseIdentifier: "TodoCell")
         contents = readContents()
+        navigationItem.title = selectedCategory.title
         
         // Do any additional setup after loading the view.
     }
@@ -106,10 +108,16 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     }
     func readContents()->Results<TodoContent>{
       
-        return realm.objects(TodoContent.self)
+        return realm.objects(TodoContent.self).filter("category == %@", selectedCategory!)
     }
     func delete(){
         
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toNewTodoView"{
+            let newItemViewController = segue.destination as! NewTodoViewController
+            newItemViewController.category = self.selectedCategory
+        }
     }
 }
 

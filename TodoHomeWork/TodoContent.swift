@@ -14,4 +14,5 @@ class TodoContent :Object{
     @Persisted var isMarked:Bool = false
     @Persisted var date:Date = Date()
     @Persisted var number:Int = 0
+    @Persisted var category: Category?
 }
